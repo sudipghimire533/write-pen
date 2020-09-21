@@ -1,0 +1,26 @@
+@font-face{
+	font-family: "Rubik";
+	src: url('Rubik.ttf');
+}
+
+:root{
+	--Blue: #2C45A3;
+	--Yellow: #FF9200;
+	--Cyan: #00FFFF;
+	--Black: #15202B;
+	--Red: #FE2C55;
+	--Purple: #7D3CFF;
+	--SandTan: #E1B382;
+	--White: #F2F2F2;
+	--Niagara: #03A87C;
+	--LightDark: #717272;
+	--Shaft: #292929;
+	--ForeGround: #aaa;
+	--fontPrimary: 21px;
+	--fontLarge: 40px;
+	--fontSmall: 16px;
+	--fontTiny: 13px;
+
+	font-family: Rubik, sans-serif, monospace;
+	color: var(--Shaft);
+}
