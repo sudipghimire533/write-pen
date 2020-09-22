@@ -24,3 +24,24 @@
 	font-family: Rubik, sans-serif, monospace;
 	color: var(--Shaft);
 }
+@media only screen and (mix-width: 950px){
+	:root{
+		--fontLarge: 28px;
+	}
+}
+
+@media only screen and (mix-width: 720px){
+	:root{
+		--fontLarge: 21px;
+		--fontSmall: 16px;
+		--fontPrimay: 18px;
+	}
+}
+@media only screen and (mix-width: 480px){
+	:root{
+		--fontLarge: 18px;
+		--fontPrimary: 14px;
+		--fontSmall: 12px;
+		--fontTiny: 12px;
+	}
+}
