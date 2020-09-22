@@ -214,10 +214,6 @@ body{
   width: 120px;
   border-radius: 5px;
 }
-.related_post:hover{
-  transform: scale(1.03);
-}
-
 #Content{
   margin: 50px 0;
   font-size: var(--fontPrimary);

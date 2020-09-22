@@ -50,7 +50,7 @@ if($thisPost == 404){
                         <i class='fa fa-calendar'></i>
                         <span>
                         <?php 
-                            echo $thisPost['created'];
+                            echo explode(' ',$thisPost['created'])[0];
                         ?>
                         </span>
                     </div>
@@ -60,16 +60,17 @@ if($thisPost == 404){
                     </div>
 
                     <div class='socialIcons' onclick="this.getElementsByClassName('link_share')[0].classList.toggle('active')">
-                        <i class='fa fa-link'></i>
+                        <i class='fa fa-share-alt'></i>
                         <span class='link_share'>
                             <input type='text' readonly='true' class='link_share_url' value='https://www.artal.org/article/2020/how-to-do-things-that-is-good-and-let-it-go' />
                             <i class='fa  fa-clipboard icon'></i>
                         </span>
-                        <i class='fa fa-facebook-square'></i>
+                        <!-- TODO: Add shareable social media link -->
+                        <!--i class='fa fa-facebook-square'></i>
                         <i class='fa fa-twitter'></i>
                         <i class='fa fa-snapchat'></i>
                         <i class='fa fa-github'></i>
-                        <i class='fa fa-whatsapp'></i>
+                        <i class='fa fa-whatsapp'></i-->
                     </div>
                 </div>
                 <article id='Content'>
@@ -120,7 +121,7 @@ if($thisPost == 404){
         document.getElementById('articleBottom').appendChild(document.getElementsByClassName('socialIcons')[0].cloneNode(true));
 
         let relatedContainer = document.getElementById('relatedContainer');
-        let sampleRelated = relatedContainer.firstElementChild;
+        let sampleRelated = relatedContainer.getElementsByClassName('related_post')[0];
 
         let handler = new XMLHttpRequest;
         handler.onerror = function(){
@@ -137,7 +138,7 @@ if($thisPost == 404){
                 let related;
                 response.forEach(post => {
                     related = sampleRelated.cloneNode(true);
-                    related.setAttribute('href', post);
+                    related.setAttribute('href', post.url);
                     related.getElementsByClassName('related_cover')[0].setAttribute('src', post.cover);
                     related.getElementsByClassName('related_title')[0].textContent = post.title;
                     relatedContainer.appendChild(related);

@@ -1,0 +1,4 @@
+RewriteEngine on
+
+RewriteRule ^post/([0-9a-zA-Z_\-\/\.\+]+)/$ /blogs/index.php?url=$1 [QSA]
+RewriteRule ^post/([0-9a-zA-Z_\-\/\.\+]+)$ /blogs/index.php?url=$1 [QSA]
