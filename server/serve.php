@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-function get_feed($url, $response = null){
+function get_post($url, $response = null){
     $conn = get_connection();
 
     $url = $conn->real_escape_string(trim($url));
@@ -102,9 +102,49 @@ function get_related($id, $count = 6){
     return $posts;
 }
 
-if(isset($_POST['action']) && isset($_POST['id'])){
-    if($_POST['action'] == 'getRelatedPost'){
-        echo json_encode(get_related($_POST['id']));
+function getFeed($notIn, $type='recent'){
+    $conn = get_connection();
+    $notIn = $conn->real_escape_string($notIn);
+
+    $ids = "-1";
+    if($type == 'bytag'){
+        // change $query accordongly
+    } else {
+        $res = $conn->query("SELECT
+                GROUP_CONCAT(Id)
+                FROM Blog
+                WHERE Id NOT IN($notIn)
+            ;") or die($conn->error . " in line ". __LINE__);
+        if($res->num_rows == 0){
+            return 1;
+        }
+        $res = $res->fetch_array(MYSQLI_NUM);
+        $ids = $res[0];
+    }
+    $res = $conn->query("SELECT
+                blog.Id AS id,
+                blog.Url AS url,
+                blog.Title AS title,
+                blog.Summary AS summary,
+                blog.CoverThumb AS cover,
+                blog.UpdatedOn AS updated
+                FROM Blog blog
+                WHERE Id IN ($ids)
+                LIMIT 10
+            ;") or die($conn->error . " in line " . __LINE__ );
+    if($res->num_rows == 0){
+        return 404;
+    }
+    $res = $res->fetch_all(MYSQLI_ASSOC);
+    $conn->close();
+    return $res;
+}
+
+if(isset($_POST['action'])){
+    if(isset($_POST['id']) && $_POST['action'] == 'getRelatedPost'){
+        print_r(json_encode(get_related($_POST['id'])));
+    } else if(isset($_POST['notIn']) && $_POST['action'] == 'getFeed' && isset($_POST['type'])){
+        print_r(json_encode(getFeed($_POST['notIn'], $_POST['type'])));
     }
 }
 ?>

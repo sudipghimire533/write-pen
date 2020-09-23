@@ -48,3 +48,22 @@ body {
 		--fontTiny: 12px;
 	}
 }
+.tag{
+	background: var(--Yellow);
+	color: var(--White);
+	text-decoration: none;
+	padding: 2px 7px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-weight: bold;
+	border: 2px solid var(--Yellow);
+	transition-property: background;
+	transition-duration: .4s;
+	display: inline-block;
+	font-size: var(--fontTiny);
+  }
+  .tag:hover,
+  .tag:focus{
+	background: var(--White);
+	color: var(--Yellow);
+  }

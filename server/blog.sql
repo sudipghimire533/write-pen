@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 22, 2020 at 10:40 PM
+-- Generation Time: Sep 23, 2020 at 07:39 PM
 -- Server version: 10.3.23-MariaDB-1
 -- PHP Version: 7.4.5
 
@@ -37,7 +37,7 @@ CREATE TABLE `Blog` (
   `Content` varchar(6000) NOT NULL,
   `Cover` varchar(200) NOT NULL,
   `CoverThumb` varchar(200) NOT NULL,
-  `Summary` varchar(300) NOT NULL
+  `Summary` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------

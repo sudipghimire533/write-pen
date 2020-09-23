@@ -3,11 +3,6 @@
     flex-flow: row wrap;
     justify-content: space-around;
 }
-#NavBar{
-    position: sticky;
-    top: 0;
-    z-index: 3;
-}
 #Main{
     display: flex;
     justify-content: center;
@@ -16,9 +11,64 @@
 #Main > *{
     flex-basis: 100%;
 }
+.filterContainer{
+  border: 2px solid var(--LightDark);
+  display: inline-block;
+  max-width: 250px;
+  padding:  10px;
+  border-radius: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+.filterContainer .tagContainer{
+    position: absolute;
+    z-index: 1;
+    background: var(--White);
+    padding: 5px 10px;
+    padding-right: 20px;
+    right: 20px;
+    text-align: left;
+    border: 2px solid var(--LightDark);
+    border-radius: 10px;
+    max-height: 0;
+    overflow-y: auto;
+    top: 110%;
+    overflow-x: hidden;
+    opacity: 0;
+    transition: max-height .3s;
+}
+.filterContainer .tagContainer.active{
+    max-height: 250px;
+    opacity: 1;
+}
+.filter_option{
+    margin: 0 5px;
+    cursor: pointer;
+    font-weight: bold;
+    border-bottom:  2px solid transparent;
+    transition-property: color, border;
+    transition-duration: .3s;
+    color: var(--Shaft);
+    text-decoration: none;
+}
+.filterContainer .tag{
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.filter_option:hover,
+.filter_option:focus,
+.filter_option.active{
+    color: var(--Niagara);
+    border-color: var(--Niagara);
+}
+
 .postContainer{
     max-width: 1200px;
     padding: 0 3vw;
+}
+.post:first-of-type{
+    display: none !important;
 }
 .post{
     color: var(--Shaft);
@@ -32,13 +82,13 @@
     min-width: 200px;
     max-width: 99%;
     border: 1px solid rgba(14, 14, 14, .2);
-    box-shadow: 5px 5px 20px rgba(120, 120, 120, .5);
-    transition-property: transform, box-shadow;
+    box-shadow: 2px 2px 10px 0px var(--LightDark);
+    transition-property: transform box-shadow;
     transition-duration: .3s;
 }
 .post:hover{
-    transform: translateY(-10px);
-    box-shadow: 2px 2px 5px rgba(120, 120, 120, .5);
+    transform: scale(.95);
+    box-shadow: none;
 }
 .postMeta,
 .postSummary{
@@ -65,6 +115,28 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 15%;
-    background: linear-gradient(rgba(0,0,0,.1),rgba(0, 0, 0, .3), var(--Black))
+    height: 20%;
+    background: linear-gradient(rgba(0,0,0,.1), rgba(0,0,0, .6));
+}
+.post:after{
+    content: 'Continue Reading....';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: scale(0);
+    box-sizing: border-box;
+    overflow: hidden;
+    text-align: center;
+    font-size: var(--fontPrimary);
+    font-weight: bold;
+    color: var(--White);
+    vertical-align: middle;
+    background: rgba(80, 80, 80, .9);
+    transition: transform .3s;;
+    padding-top: 60%;
+}
+.post:hover:after{
+    transform: scale(1);
 }

@@ -9,7 +9,7 @@ if(!isset($_GET['url']) || empty($_GET['url'])){
 }
 require_once('../server/serve.php');
 
-$thisPost = get_feed($_GET['url']);
+$thisPost = get_post($_GET['url']);
 if($thisPost == 404){
     echo "Post not fond...";
     exit;
@@ -24,7 +24,7 @@ if($thisPost == 404){
 
     <link rel="stylesheet" href="/blogs/blog.css" />
     <link rel="stylesheet" href="/index.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/fontello/css/fontello.css" />
 </head>
 <body>
     <?php
@@ -50,7 +50,7 @@ if($thisPost == 404){
                     </div>
                     
                     <div class='meta_date'>
-                        <i class='fa fa-calendar'></i>
+                        <i class='icon-calendar'></i>
                         <span>
                         <?php 
                             echo explode(' ',$thisPost['created'])[0];
@@ -58,15 +58,15 @@ if($thisPost == 404){
                         </span>
                     </div>
                     <div class='meta_time'>
-                        <i class='fa fa-star'></i>
+                        <i class='icon-fire'></i>
                         <span>4</span> min read
                     </div>
 
                     <div class='socialIcons' onclick="this.getElementsByClassName('link_share')[0].classList.toggle('active')">
-                        <i class='fa fa-share-alt'></i>
+                        <i class='icon-link'></i>
                         <span class='link_share'>
                             <input type='text' readonly='true' class='link_share_url' value='https://www.artal.org/article/2020/how-to-do-things-that-is-good-and-let-it-go' />
-                            <i class='fa  fa-clipboard icon'></i>
+                            <i class='icon-clipboard'></i>
                         </span>
                         <!-- TODO: Add shareable social media link -->
                         <!--i class='fa fa-facebook-square'></i>
@@ -134,8 +134,7 @@ if($thisPost == 404){
             if(this.readyState == 4 && this.status == 200){
                 let response = JSON.parse(this.responseText);
                 if(response == 1){
-                    relatedContainer.innerHTML = 'Failed to get related posts...';
-                    return;
+                    return this.onerror();
                 }
 
                 let related;
