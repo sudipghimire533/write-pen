@@ -10,8 +10,8 @@
     <title>Home Pages</title>
 
     <link rel="stylesheet" href="home.css" />
-    <link rel="stylesheet" href="/index.css" />
-    <link rel="stylesheet" href="/fontello/css/fontello.css" />
+    <link rel="stylesheet" href="/assest/index.css" />
+    <link rel="stylesheet" href="/assest/fontello/css/fontello.css" />
 </head>
 <body>
     <?php

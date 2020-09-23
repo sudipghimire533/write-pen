@@ -23,12 +23,12 @@ if($thisPost == 404){
     <title><?php echo $thisPost['title']; ?></title>
 
     <link rel="stylesheet" href="/blogs/blog.css" />
-    <link rel="stylesheet" href="/index.css" />
-    <link rel="stylesheet" href="/fontello/css/fontello.css" />
+    <link rel="stylesheet" href="/assest/index.css" />
+    <link rel="stylesheet" href="/assest/fontello/css/fontello.css" />
 </head>
 <body>
     <?php
-        include_once('../navbar.php');
+        include_once('../assest/navbar.php');
     ?>
     <div id='Main'>
         <div id='contentWrapper'>
@@ -43,7 +43,7 @@ if($thisPost == 404){
                 </h1>
                 <div class='metaInfo'>
                     <div class='meta_author'>
-                        <img src='../person.jpeg' alt='sudip Ghimire..' class='author_avatar' load='lazy' height='80' width='80' />
+                        <img src='/assest/author.jpeg' alt='sudip Ghimire..' class='author_avatar' load='lazy' height='80' width='80' />
                         <div class='author_name'>
                             Sudip <br />Ghmire
                         </div>
@@ -97,7 +97,7 @@ if($thisPost == 404){
 
             <div id='aboutAuthor'>
                 <div class='meta_author'>
-                    <img src='../person.jpeg' alt='sudip Ghimire..' class='author_avatar' load='lazy' height='80' width='80' />
+                    <img src='/assest/author.jpeg' alt='sudip Ghimire..' class='author_avatar' load='lazy' height='80' width='80' />
                     <div class='author_name'>Sudip Ghmire</div>
                 </div>
                 <div id='authorAbout'>
