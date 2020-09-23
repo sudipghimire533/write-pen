@@ -27,6 +27,9 @@ if($thisPost == 404){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+    <?php
+        include_once('../navbar.php');
+    ?>
     <div id='Main'>
         <div id='contentWrapper'>
             <div id='postCover' style="background: url('<?php echo $thisPost['cover']; ?>');">

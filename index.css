@@ -2,7 +2,10 @@
 	font-family: "Rubik";
 	src: url('Rubik.ttf');
 }
-
+body {
+	margin: 0;
+	padding: 0;
+}
 :root{
 	--Blue: #2C45A3;
 	--Yellow: #FF9200;
