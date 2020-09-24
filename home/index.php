@@ -15,7 +15,7 @@
 </head>
 <body>
     <?php
-        include_once('../navbar.php');
+        include_once('../assest/navbar.php');
     ?>
     <div id='Main'>
         <div class='filterContainer'>
@@ -56,7 +56,8 @@
 </body>
 <script>
     let sample = document.getElementsByClassName('post')[0];
-    let notInMap = new Map;
+    let appndedPost = new Map;
+    let notIn = "0";
 
     (function(){
         let postContainer = document.getElementsByClassName('postContainer')[0];
@@ -74,7 +75,12 @@
                 }
                 let allPosts = JSON.parse(this.responseText);
                 allPosts.forEach(post => {
-                    if()
+                    if(appendedPost.has(post.id)){
+                        continue;
+                    }
+                    post.set(post.id, true){}
+                    notIn += ","+post.id;
+                    
                     let craft = sample.cloneNode(true);
                     craft.setAttribute('href', '/post/'+ post.url);
                     craft.getElementsByClassName('postCover')[0].setAttribute('src', post.cover);

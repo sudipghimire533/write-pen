@@ -14,6 +14,7 @@ if($thisPost == 404){
     echo "Post not fond...";
     exit;
 }
+$summary = substr($thisPost['summary'], 0, 160);
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +22,13 @@ if($thisPost == 404){
 <head>
     <meta charset="UTF-8">
     <title><?php echo $thisPost['title']; ?></title>
+
+    <meta name="Descrption" content="<?php echo $summary; ?>">
+    <meta name="Keywords" content="sudip-ghimire <?php echo $thisPost['tags']; ?> learn-programming programming-blog">
+    
+    <meta property="og:title" content="<?php echo $thisPost['title']; ?>">
+    <meta property="og:description" content="<?php echo $summary; ?>">
+    <meta property="og:image" content="<?php echo $thisPost['cover_thumb']; ?>">
 
     <link rel="stylesheet" href="/blogs/blog.css" />
     <link rel="stylesheet" href="/assest/index.css" />
@@ -68,12 +76,10 @@ if($thisPost == 404){
                             <input type='text' readonly='true' class='link_share_url' value='https://www.artal.org/article/2020/how-to-do-things-that-is-good-and-let-it-go' />
                             <i class='icon-clipboard'></i>
                         </span>
-                        <!-- TODO: Add shareable social media link -->
-                        <!--i class='fa fa-facebook-square'></i>
-                        <i class='fa fa-twitter'></i>
-                        <i class='fa fa-snapchat'></i>
-                        <i class='fa fa-github'></i>
-                        <i class='fa fa-whatsapp'></i-->
+                        <i class='icon-facebook'></i>
+                        <i class='icon-twitter'></i>
+                        <i class='icon-github'></i>
+                        <i class='icon-whatsapp'></i>
                     </div>
                 </div>
                 <article id='Content'>
@@ -86,7 +92,7 @@ if($thisPost == 404){
                     <span id='tagContainer'>
                         <!--a href='#' class='tag'>c++</a-->
                         <?php
-                            foreach (explode(',', $thisPost['tags']) as $key => &$value) {
+                            foreach (explode(' ', $thisPost['tags']) as $key => &$value) {
                                 echo "<a class='tag' href='/taggedfor/$value'>$value</a>\n";
                             }
                         ?>

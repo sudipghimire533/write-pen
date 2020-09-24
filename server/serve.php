@@ -16,8 +16,10 @@ function get_post($url, $response = null){
                 blog.CreatedOn AS created,
                 blog.UpdatedOn AS updated,
                 blog.Content AS info,
+                blog.Summary AS summary,
                 blog.Cover AS cover,
-                GROUP_CONCAT(bt.Tag) AS tags
+                blog.CoverThumb AS cover_thumb,
+                GROUP_CONCAT(bt.Tag SEPARATOR ' ' ) AS tags
                 FROM
                 Blog AS blog
                 LEFT JOIN
