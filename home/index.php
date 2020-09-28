@@ -1,7 +1,17 @@
 <?php
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);    
+    error_reporting(E_ALL);
+
+    $type = 'recent';
+    $data = null;
+
+    if(isset($_GET['taggedfor'])){
+        $data = htmlspecialchars(urlencode($_GET['taggedfor']));
+        $type = 'bytag';
+    } else if(isset($_GET['trending'])){
+        $type = 'trending';
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +19,7 @@
     <meta charset="UTF-8">
     <title>Home Pages</title>
 
-    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="/home/home.css" />
     <link rel="stylesheet" href="/assest/index.css" />
     <link rel="stylesheet" href="/assest/fontello/css/fontello.css" />
 </head>
@@ -20,30 +30,23 @@
     <div id='Main'>
         <div class='filterContainer'>
             <span>
-                <a href='#' class='filter_option'>Trending</a>
-                <a href='#' class='filter_option active'>Recent</a>
-                <a href='#' class='filter_option' onclick="document.getElementsByClassName('tagContainer')[0].classList.toggle('active');">Tag &#9660;</a>
+                <a href='/trending' class='filter_option trending'>Trending</a>
+                <a href='/recent' class='filter_option recent'>Recent</a>
+                <a href='#' class='filter_option bytag' onclick="this.parentElement.getElementsByClassName('tagContainer')[0].classList.toggle('active');">Tag &#9660;</a>
                 <div class='tagContainer'>
-                    <span class='tag active'>all</span>
-                    <span class='tag'>programming</span>
-                    <span class='tag'>linux</span>
-                    <span class='tag'>security</span>
-                    <span class='tag'>gnome</span>
-                    <span class='tag'>GUI</span>
-                    <span class='tag'>c++</span>
-                    <span class='tag'>overfloading</span>
-                    <span class='tag'>idioms</span>
-                    <span class='tag'>electronics</span>
-                    <span class='tag'>scription</span>
-                    <span class='tag'>javascript</span>
-                    <span class='tag'>java</span>
+                    <a href='/taggedfor/c++' class='tag'>c++</a>
+                    <a href='/taggedfor/c' class='tag'>c</a>
+                    <a href='/taggedfor/design-pattern' class='tag'>design pattern</a>
+                    <a href='/taggedfor/idioms' class='tag'>Idioms</a>
+                    <a href='/taggedfor/linux' class='tag'>linux</a>
+                    <a href='/taggedfor/lifestyle' class='tag'>lifestyle</a>
                 </div>
             </span>
         </div>
         <div class='postContainer'>
             <a href='#' class='post'>
                 <div class='coverContainer'>
-                    <img src='' load='lazy' width='200' class='postCover' />
+                    <img src='' load='lazy' width='200' height='80' class='postCover' />
                 </div>
                 <div class='postMeta'>
                     <h2 class='post_title'></h2>
@@ -56,29 +59,33 @@
 </body>
 <script>
     let sample = document.getElementsByClassName('post')[0];
-    let appndedPost = new Map;
+    let appendedPost = new Map;
     let notIn = "0";
 
     (function(){
         let postContainer = document.getElementsByClassName('postContainer')[0];
 
-        let type = 'recent';
+        let type = <?php echo json_encode($type); ?>;
+        let data = <?php echo json_encode($data); ?>;
+
+        document.querySelector(".filter_option."+type).classList.add('active');
 
         let handler = new XMLHttpRequest;
         handler.onerror = function(){
-            postContainer.innerHTML = "<div>Failed to fetch posts.<a href=''>reload</a><div>";
+            postContainer.innerHTML = "<div><h1>Failed to fetch posts.<a href=''>reload</a></h1><div>";
         };
         handler.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
-                if(this.responseText == 1){
+                console.log(this.responseText);
+                if(this.responseText == 1 || this.responseText == 404){
                     return this.onerror();
                 }
                 let allPosts = JSON.parse(this.responseText);
                 allPosts.forEach(post => {
                     if(appendedPost.has(post.id)){
-                        continue;
+                        return;
                     }
-                    post.set(post.id, true){}
+                    appendedPost.set(post.id, true);
                     notIn += ","+post.id;
                     
                     let craft = sample.cloneNode(true);
@@ -93,7 +100,8 @@
         };
         handler.open('POST', '/server/serve.php', true);
         handler.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        handler.send('action=getFeed&notIn='+notIn+'&type='+type);
+        handler.send('action=getFeed&notIn='+notIn+'&type='+type+'&data='+data);
+        console.log('action=getFeed&notIn='+notIn+'&type='+type+'&data='+data);
     })();
 </script>
 </html>

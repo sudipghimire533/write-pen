@@ -30,6 +30,7 @@
     #NavBar > .Container > *{
         flex-grow: 1;
         margin: 0 10px;
+        text-align: center;
         position: relative;
     }
     #searchQuery{
@@ -61,17 +62,21 @@
         opacity:  .6;
         transition: opacity .2s;
     }
-    #NavBar .icon-home{
+    #NavBar .icon-home,
+    #NavBar .color-toggler{
         color: var(--White);
         text-decoration: none;
         opacity: .6;
         transition: opacty .2s;
+        cursor: pointer;
     }
-    #NavBar .icon-home:before{
+    #NavBar .icon-home:before,
+    #NavBar .color-toggler:before{
         font-size: calc(var(--fontPrimary) * 1.3)
     }
     #NavBar .icon-home:hover,
-    #NavBar .icon-search:hover{
+    #NavBar .icon-search:hover,
+    #NavBar .color-toggler:hover{
         opacity: 1;
     }
 </style>

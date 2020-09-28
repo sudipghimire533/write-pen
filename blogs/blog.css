@@ -217,6 +217,7 @@ body{
 .related_cover{
   min-width: 120px;
   width: 120px;
+  height: 70px;
   border-radius: 5px;
 }
 #Content{
@@ -238,6 +239,10 @@ body{
   color: var(--Black);
 }
 
+#Content,
+#Content *{
+  color: inherit;
+}
 #Content a{
   color: var(--Blue);
   line-break: anywhere;
@@ -245,6 +250,7 @@ body{
 #Content h2{
   font-size: calc(var(--fontPrimary) * 1.7);
   margin-bottom: 10px;
+  color: var(--Black);
 }
 #Content p{
   margin-top: 0;

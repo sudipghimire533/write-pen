@@ -104,24 +104,33 @@ function get_related($id, $count = 6){
     return $posts;
 }
 
-function getFeed($notIn, $type='recent'){
+function get_feed($notIn, $type='recent', $data = null){
     $conn = get_connection();
     $notIn = $conn->real_escape_string($notIn);
 
     $ids = "-1";
-    if($type == 'bytag'){
-        // change $query accordongly
+    if($type == 'bytag' && $data != null){
+        $tag = $conn->real_escape_string($data);
+        $res = $conn->query("SELECT
+                    Group_CONCAT(DISTINCT Blog)
+                    FROM BlogTag
+                    WHERE
+                    FIND_IN_SET('$tag', Tag) AND
+                    Blog NOT IN ($notIn)
+                ;");
+        $res = $res->fetch_array(MYSQLI_NUM);
+        $ids = $res[0];
     } else {
         $res = $conn->query("SELECT
-                GROUP_CONCAT(Id)
+                GROUP_CONCAT(DISTINCT Id)
                 FROM Blog
                 WHERE Id NOT IN($notIn)
             ;") or die($conn->error . " in line ". __LINE__);
-        if($res->num_rows == 0){
-            return 1;
-        }
         $res = $res->fetch_array(MYSQLI_NUM);
         $ids = $res[0];
+    }
+    if($ids == null){
+        return 404;
     }
     $res = $conn->query("SELECT
                 blog.Id AS id,
@@ -146,7 +155,7 @@ if(isset($_POST['action'])){
     if(isset($_POST['id']) && $_POST['action'] == 'getRelatedPost'){
         print_r(json_encode(get_related($_POST['id'])));
     } else if(isset($_POST['notIn']) && $_POST['action'] == 'getFeed' && isset($_POST['type'])){
-        print_r(json_encode(getFeed($_POST['notIn'], $_POST['type'])));
+        print_r(json_encode(get_feed($_POST['notIn'], $_POST['type'], urlencode($_POST['data']))));
     }
 }
 ?>

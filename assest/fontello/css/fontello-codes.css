@@ -19,6 +19,8 @@
 .icon-email:before { content: '\e811'; } /* '' */
 .icon-location:before { content: '\e812'; } /* '' */
 .icon-phone-circled:before { content: '\e813'; } /* '' */
+.icon-moon:before { content: '\e814'; } /* '' */
+.icon-sun:before { content: '\e815'; } /* '' */
 .icon-link-ext:before { content: '\f08e'; } /* '' */
 .icon-paper-plane-empty:before { content: '\f1d9'; } /* '' */
 .icon-toggle-off:before { content: '\f204'; } /* '' */

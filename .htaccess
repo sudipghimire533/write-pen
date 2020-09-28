@@ -2,3 +2,12 @@ RewriteEngine on
 
 RewriteRule ^post/([0-9a-zA-Z_\-\/\.\+]+)/$ /blogs/index.php?url=$1 [QSA]
 RewriteRule ^post/([0-9a-zA-Z_\-\/\.\+]+)$ /blogs/index.php?url=$1 [QSA]
+
+RewriteRule ^taggedfor/([0-9a-zA-Z_\-\.\+]+)/$ /home/index.php?taggedfor=$1 [QSA]
+RewriteRule ^taggedfor/([0-9a-zA-Z_\-\.\+]+)$ /home/index.php?taggedfor=$1 [QSA]
+
+RewriteRule ^trending/$ /home/index.php?trending=1 [QSA]
+RewriteRule ^trending$ /home/index.php?trending=1 [QSA]
+
+RewriteRule ^recent/$ /home/index.php [QSA]
+RewriteRule ^recent$ /home/index.php [QSA]
