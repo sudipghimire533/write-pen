@@ -30,7 +30,6 @@
     #NavBar > .Container > *{
         flex-grow: 1;
         margin: 0 10px;
-        text-align: center;
         position: relative;
     }
     #searchQuery{

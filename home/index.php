@@ -46,7 +46,7 @@
         <div class='postContainer'>
             <a href='#' class='post'>
                 <div class='coverContainer'>
-                    <img src='' load='lazy' width='200' height='80' class='postCover' />
+                    <img src='' load='lazy' width='200' height='80' class='postCover' alt=' '/>
                 </div>
                 <div class='postMeta'>
                     <h2 class='post_title'></h2>

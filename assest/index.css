@@ -27,20 +27,20 @@ body {
 	font-family: Rubik, sans-serif, monospace;
 	color: var(--Shaft);
 }
-@media only screen and (mix-width: 950px){
+@media only screen and (max-width: 950px){
 	:root{
 		--fontLarge: 28px;
 	}
 }
 
-@media only screen and (mix-width: 720px){
+@media only screen and (max-width: 720px){
 	:root{
-		--fontLarge: 21px;
-		--fontSmall: 16px;
+		--fontLarge: 22px;
+		--fontSmall: 15px;
 		--fontPrimay: 18px;
 	}
 }
-@media only screen and (mix-width: 480px){
+@media only screen and (max-width: 480px){
 	:root{
 		--fontLarge: 18px;
 		--fontPrimary: 14px;

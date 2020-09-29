@@ -40,7 +40,7 @@ $summary = substr($thisPost['summary'], 0, 160);
     ?>
     <div id='Main'>
         <div id='contentWrapper'>
-            <div id='postCover' style="background: url('<?php echo $thisPost['cover']; ?>');">
+            <div id='postCover' style="background-image: url('<?php echo $thisPost['cover']; ?>');">
             </div>
 
             <main id='article'>
@@ -72,7 +72,7 @@ $summary = substr($thisPost['summary'], 0, 160);
 
                     <div class='socialIcons' onclick="this.getElementsByClassName('link_share')[0].classList.toggle('active')">
                         <i class='icon-link'></i>
-                        <span class='link_share'>
+                        <span class='link_share' onclick="">
                             <input type='text' readonly='true' class='link_share_url' value='https://www.artal.org/article/2020/how-to-do-things-that-is-good-and-let-it-go' />
                             <i class='icon-clipboard'></i>
                         </span>
@@ -109,8 +109,8 @@ $summary = substr($thisPost['summary'], 0, 160);
                 <div id='authorAbout'>
                     I am sudip ghimire from pokhara, Nepal. I share my technical knowledge through writings. For me sharing is the best thing i can offer. I mostly write about programming and techniques in this blog. You can also visit my pesonal portfolio or hire me.
                     <div class='btnContainer'>
-                        <a href='#' class='author_btn'>Visit me</a>
-                        <a href='#' class='author_btn'>Hire me</a>
+                        <a href='#' class='author_btn'>Visit my profile</a>
+                        <a href='#' class='author_btn'>Buy me a coffee</a>
                     </div>
                 </div>
             </div>
