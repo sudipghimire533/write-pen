@@ -1,0 +1,31 @@
+.inputContainer{
+    margin: 20px 10px;
+}
+trix-editor{
+    max-height: 400px !important;
+    min-height: 250px !important;
+    overflow: auto;
+}
+.inputContainer > input{
+    box-sizing: border-box;
+    padding: 15px 20px;
+    width: 48%;
+}
+input[name='title']{
+    font-size: 22px;
+    width: 100%;
+}
+input[name='submit'],
+input[type='button']{
+    width: 200px;
+    cursor: pointer;
+    padding: 10px;
+}
+textarea{
+    width: 100%;
+    min-height: 100px;
+}
+#content{
+    width: 100%;
+    min-height: 200px;
+}

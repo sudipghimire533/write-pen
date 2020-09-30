@@ -90,7 +90,6 @@ $summary = substr($thisPost['summary'], 0, 160);
 
                 <div id='articleBottom'>
                     <span id='tagContainer'>
-                        <!--a href='#' class='tag'>c++</a-->
                         <?php
                             foreach (explode(' ', $thisPost['tags']) as $key => &$value) {
                                 echo "<a class='tag' href='/taggedfor/$value'>$value</a>\n";

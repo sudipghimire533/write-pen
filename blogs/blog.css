@@ -61,6 +61,7 @@ body{
 }
 #Content{
   max-width: 800px;
+  line-break: anywhere;
 }
 #postHeading{
   font-size: var(--fontLarge);

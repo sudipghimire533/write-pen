@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write a article...</title>
+    <link rel="stylesheet" href="write.css">
+
+    <link rel="stylesheet" href="trix.css" />
+    <script src="trix.js"></script>
+</head>
+<body>
+    <form method='POST' action='write.php' id='form'>
+        <div class='inputContainer'>
+            <input type="text" name='title' placeholder="Post Title.."  required='' minlength="10" />
+        </div>
+        <div class='inputContainer'>
+            <input name='cover' type='text'  placeholder='Cover Image'  required='' minlength="10"/>
+            <input name='cover_thumbnail' type='text' placeholder="Cover Image Thumbnail"  required='' minlength="10"/>
+        </div>
+        <div class='inputContainer'>
+            <input type='button' value='show html' id='show_html'/>
+        </div>
+        <div class='inputContainer' id='html_raw' style='display: none;'>
+            <textarea id='content' name='content' required='' minlength="10"></textarea>
+            <input type='button' value='hide' id="hide_html" />
+            <input type='button' value='update html' id='insert_html' />
+        </div>
+        <div class='inputContainer'>
+            <trix-editor input='content' placeholder='Post Content'></trix-editor>
+        </div>
+        <div class='inputContainer'>
+            <textarea form='form' name='summary' placeholder='Quick Summary'></textarea>
+        </div>
+        <div class='inputContainer'>
+            <input type='text' name='tags' placeholder='Tags Seperated by comma...'  required='' minlength="10"/>
+            <input type='text' name='url' placeholder='url slug'  required='' minlength="10"/>
+        </div>
+        <div class='inputContainer'>
+            <input type='submit' value='post'/>
+        </div>
+    </form>
+</body>
+<script type='text/javascript'>
+    (function(){
+        let editor = document.querySelector("trix-editor").editor;
+
+        let form = document.getElementsByTagName('form')[0];
+
+        let content = document.getElementById('content');
+        let title = document.getElementById('title');
+        let tags = document.getElementById('tags');
+        let url = document.getElementById('url');
+        let raw = document.getElementById('html_raw');
+
+        document.getElementById('show_html').onclick = function(){
+            raw.style.display = 'block';
+        };
+        document.getElementById('hide_html').onclick = function(){
+            raw.style.display = 'none';
+        }
+        form.onsubmit = function(){
+        }
+
+        document.getElementById('insert_html').onclick = function(){
+            let value = content.value;
+            editor.setSelectedRange([0, value.length]);
+            editor.deleteInDirection('forward');
+                value = value.replace(/(<br\s*\/?>){2,}/gi, '<br>');
+            console.log(value);
+            editor.insertHTML(value);
+        }
+    }());
+</script>
+</html>
