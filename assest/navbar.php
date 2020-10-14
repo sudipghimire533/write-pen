@@ -1,7 +1,7 @@
 <div id='NavBar'>
     <div class='Container'>
         <div id='nav_left'>
-            <a class='icon-home' href='/home'> Home</a>
+            <a class='icon-home' href='/home'>Home</a>
         </div>
         <div id='nav_middle'>
             <form class='topSearchContainer' method='GET'>
@@ -10,6 +10,7 @@
             </form>
         </div>
         <div id='nav_right'>
+            <a href='#' class='icon-link-ext' title='Write or edit an article..'>Write</a>
         </div>
     </div>
 </div>
@@ -31,6 +32,9 @@
         flex-grow: 1;
         margin: 0 10px;
         position: relative;
+    }
+    #nav_right{
+        text-align: right;
     }
     #searchQuery{
         margin: 0;
@@ -62,6 +66,7 @@
         transition: opacity .2s;
     }
     #NavBar .icon-home,
+    #NavBar .icon-link-ext,
     #NavBar .color-toggler{
         color: var(--White);
         text-decoration: none;
@@ -70,11 +75,13 @@
         cursor: pointer;
     }
     #NavBar .icon-home:before,
-    #NavBar .color-toggler:before{
-        font-size: calc(var(--fontPrimary) * 1.3)
+    #NavBar .color-toggler:before,
+    #NavBar .icon-link-ext:before{
+        font-size: calc(var(--fontPrimary) * 1.2);
     }
     #NavBar .icon-home:hover,
     #NavBar .icon-search:hover,
+    #NavBar .icon-link-ext:hover,
     #NavBar .color-toggler:hover{
         opacity: 1;
     }

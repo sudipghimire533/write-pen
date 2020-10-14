@@ -13,18 +13,26 @@ function get_post($url, $response = null){
     $res = $conn->query("SELECT
                 blog.Title AS title,
                 blog.Id AS id,
+                writers.FirstName AS a_fname,
+                writers.LastName AS a_lname,
+                writers.Intro AS a_intro,
+                writers.Link AS a_link,
+                writers.Avatar AS a_avatar,
                 blog.CreatedOn AS created,
                 blog.UpdatedOn AS updated,
                 blog.Content AS info,
                 blog.Summary AS summary,
                 blog.Cover AS cover,
                 blog.CoverThumb AS cover_thumb,
-                GROUP_CONCAT(bt.Tag SEPARATOR ' ' ) AS tags
+                GROUP_CONCAT(DISTINCT(bt.Tag) SEPARATOR ' ' ) AS tags
                 FROM
                 Blog AS blog
                 LEFT JOIN
                 BlogTag AS bt
                 ON bt.Blog=blog.Id
+                LEFT JOIN
+                Writers AS writers
+                ON writers.Id=blog.Author
                 WHERE blog.Url='$url'
             ;") or die($conn->error ." in line ". __LINE__);
     $res = $res->fetch_assoc();
@@ -95,6 +103,9 @@ function get_related($id, $count = 6){
                 blog.CoverThumb as cover
                 FROM Blog blog
                 WHERE blog.Id NOT IN ($ids)
+                ORDER BY 
+                blog.UpdatedOn
+                DESC
                 LIMIT $remaining
             ;") or die($conn->error);
         $res = $res->fetch_all(MYSQLI_ASSOC);

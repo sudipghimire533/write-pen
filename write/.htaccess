@@ -1,5 +1,0 @@
-AuthType Basic
-AuthName "restricted area"
-AuthUserFile /var/www/html/local/write-pen/write/.htpasswd
-require valid-user
-

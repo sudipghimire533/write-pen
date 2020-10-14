@@ -15,7 +15,9 @@ if(!(
     isset($_POST['title']) &&
     isset($_POST['cover']) &&
     isset($_POST['cover_thumbnail']) &&
-    isset($_POST['summary'])
+    isset($_POST['summary']) &&
+    isset($_POST['userid']) &&
+    isset($_POST['password'])
 )){
     echo "<h1>incomplete data...</h1><hr />";
     echo json_encode($_POST);
@@ -24,6 +26,24 @@ if(!(
 require_once '../server/global.php';
 
 $conn = get_connection();
+
+$userid = $conn->real_escape_string(trim($_POST['userid']));
+$password = $conn->real_escape_string(trim($_POST['password']));
+
+$user = $conn->query("SELECT 
+                password
+                FROM Writers
+                WHERE Id=$userid
+            ") or die($conn->error . " in line " . __LINE__);
+if($user->num_rows == 0){
+    die("Unauthorized user id");
+    exit;
+}
+$hash = $user->fetch_array(MYSQLI_NUM)[0];
+if(!password_verify($password, $hash)){
+    die("invalid login...");
+    exit;
+}
 
 $title = $conn->real_escape_string(trim($_POST['title']));
 $cover = $conn->real_escape_string(trim($_POST['cover']));
@@ -36,9 +56,9 @@ $summary = $conn->real_escape_string(trim($_POST['summary']));
 $conn->autocommit(false);
 $conn->query("INSERT
             INTO Blog
-            (Title, Url, Content, Cover, CoverThumb, Summary)
+            (Title, Url, Content, Cover, CoverThumb, Summary, Author)
             VALUES
-            ('$title', '$url', '$content', '$cover', '$cover_thumbnail', '$summary') 
+            ('$title', '$url', '$content', '$cover', '$cover_thumbnail', '$summary', $userid) 
             ;") or die($conn->error . " at line ".__LINE__);
 
 $id = $conn->insert_id;

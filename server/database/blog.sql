@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 23, 2020 at 07:39 PM
--- Server version: 10.3.23-MariaDB-1
--- PHP Version: 7.4.5
+-- Generation Time: Oct 14, 2020 at 08:22 PM
+-- Server version: 10.3.24-MariaDB-2
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -34,10 +34,11 @@ CREATE TABLE `Blog` (
   `CreatedOn` timestamp NOT NULL DEFAULT current_timestamp(),
   `UpdatedOn` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `Url` varchar(200) NOT NULL,
-  `Content` varchar(6000) NOT NULL,
+  `Content` mediumtext NOT NULL,
   `Cover` varchar(200) NOT NULL,
   `CoverThumb` varchar(200) NOT NULL,
-  `Summary` varchar(500) NOT NULL
+  `Summary` varchar(500) NOT NULL,
+  `Author` int(11) NOT NULL DEFAULT 100
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -49,6 +50,22 @@ CREATE TABLE `Blog` (
 CREATE TABLE `BlogTag` (
   `Blog` int(11) NOT NULL,
   `Tag` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Writers`
+--
+
+CREATE TABLE `Writers` (
+  `Id` int(11) NOT NULL,
+  `FirstName` varchar(20) NOT NULL,
+  `LastName` varchar(20) NOT NULL,
+  `Avatar` varchar(200) NOT NULL,
+  `Intro` varchar(500) NOT NULL,
+  `Link` varchar(150) NOT NULL,
+  `password` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -67,6 +84,12 @@ ALTER TABLE `Blog`
 --
 ALTER TABLE `BlogTag`
   ADD PRIMARY KEY (`Blog`,`Tag`);
+
+--
+-- Indexes for table `Writers`
+--
+ALTER TABLE `Writers`
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- AUTO_INCREMENT for dumped tables

@@ -14,6 +14,7 @@ if($thisPost == 404){
     echo "Post not fond...";
     exit;
 }
+
 $summary = substr($thisPost['summary'], 0, 160);
 ?>
 
@@ -51,9 +52,11 @@ $summary = substr($thisPost['summary'], 0, 160);
                 </h1>
                 <div class='metaInfo'>
                     <div class='meta_author'>
-                        <img src='/assest/author.jpeg' alt='sudip Ghimire..' class='author_avatar' load='lazy' height='80' width='80' />
+                        <img src='<?php echo $thisPost['a_avatar']; ?>' alt='Author' class='author_avatar' load='lazy' height='80' width='80' />
                         <div class='author_name'>
-                            Sudip <br />Ghmire
+                            <?php
+                                echo $thisPost['a_fname']  . "<br/>" . $thisPost['a_lname'];
+                            ?>
                         </div>
                     </div>
                     
@@ -102,13 +105,15 @@ $summary = substr($thisPost['summary'], 0, 160);
 
             <div id='aboutAuthor'>
                 <div class='meta_author'>
-                    <img src='/assest/author.jpeg' alt='sudip Ghimire..' class='author_avatar' load='lazy' height='80' width='80' />
-                    <div class='author_name'>Sudip Ghmire</div>
+                    <img src='<?php echo $thisPost['a_avatar']; ?>' alt='Author' class='author_avatar' load='lazy' height='80' width='80' />
+                    <div class='author_name'><?php echo $thisPost['a_fname'] . ' ' . $thisPost['a_lname']; ?></div>
                 </div>
                 <div id='authorAbout'>
-                    I am sudip ghimire from pokhara, Nepal. I share my technical knowledge through writings. For me sharing is the best thing i can offer. I mostly write about programming and techniques in this blog. You can also visit my pesonal portfolio or hire me.
+                    <?php
+                        echo $thisPost['a_intro']; 
+                    ?>
                     <div class='btnContainer'>
-                        <a href='#' class='author_btn'>Visit my profile</a>
+                        <a href='<?php echo $thisPost['a_link']; ?>' target='blank' class='author_btn'>Visit my profile</a>
                         <a href='#' class='author_btn'>Buy me a coffee</a>
                     </div>
                 </div>
@@ -137,6 +142,7 @@ $summary = substr($thisPost['summary'], 0, 160);
         };
         handler.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
+                console.log(this.responseText);
                 let response = JSON.parse(this.responseText);
                 if(response == 1){
                     return this.onerror();
